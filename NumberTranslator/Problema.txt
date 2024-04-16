@@ -1,0 +1,3 @@
+Dato un numero intero, tradurlo in stringa:
+Esempio: 1234
+Risultato: milleduecentotrentaquattro
