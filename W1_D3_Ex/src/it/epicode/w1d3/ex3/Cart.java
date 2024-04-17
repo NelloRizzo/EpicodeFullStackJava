@@ -31,7 +31,6 @@ public class Cart {
 	}
 
 	public Cart(Customer customer, Product[] products) {
-		super();
 		this.customer = customer;
 		this.products = products;
 	}

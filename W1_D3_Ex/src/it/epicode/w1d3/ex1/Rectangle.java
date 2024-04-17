@@ -11,6 +11,7 @@ public class Rectangle {
 	}
 
 	public void setWidth(double width) {
+		if (width < 0) return; // comunica un errore all'utente e non fa nulla!
 		this.width = width;
 	}
 
