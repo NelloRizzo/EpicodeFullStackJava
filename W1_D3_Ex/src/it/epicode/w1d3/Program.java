@@ -36,13 +36,13 @@ public class Program {
 		while ((choice = menu(menuItems)) != 0) {
 			switch (choice) {
 			case 1:
-				Ex1.execute();
+				Ex1.main();
 				break;
 			case 2:
-				Ex2.execute();
+				Ex2.main();
 				break;
 			case 3:
-				Ex3.execute();
+				Ex3.main();
 				break;
 			}
 		}

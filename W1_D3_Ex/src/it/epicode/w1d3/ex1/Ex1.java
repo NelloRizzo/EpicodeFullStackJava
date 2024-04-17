@@ -18,7 +18,7 @@ public class Ex1 {
 		System.out.println("La somma dei perimetri è: " + (p1 + p2));
 	}
 
-	public static void execute() {
+	public static void main() {
 		printRectangle(new Rectangle(10, 20));
 		printRectangle2(new Rectangle(16, 31), new Rectangle(13, 26));
 	}

@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 public class Ex3 {
 
-	public static void execute() {
+	public static void main() {
 		Product pc = new Product("0001", "PC", 1000, 2);
 		Product mouse = new Product("0002", "Mouse", 15, 100);
 		Customer me = new Customer("0001", "Nello Rizzo", "nellorizzo@live.it", LocalDate.now());
