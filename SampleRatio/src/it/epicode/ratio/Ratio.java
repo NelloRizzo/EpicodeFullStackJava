@@ -8,9 +8,10 @@ public class Ratio {
 	int denominator;
 
 	Ratio() {
-		signum = 1;
-		numerator = 0;
-		denominator = 1;
+//		signum = 1;
+//		numerator = 0;
+//		denominator = 1;
+		this(0,1);
 	}
 
 	Ratio(int numerator, int denominator) {
@@ -26,6 +27,7 @@ public class Ratio {
 	}
 
 	Ratio(float number) {
+		this();
 		signum = number > 0 ? 1 : -1;
 		if (number < 0)
 			number = -number;
