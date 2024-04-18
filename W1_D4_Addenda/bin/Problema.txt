@@ -1,0 +1,7 @@
+Problema
+
+1. Occorre implementare un sistema che sia in grado, attraverso delle primitive grafiche,
+di gestire l'accensione e lo spegnimento di punti in una griglia rettangolare.
+
+2. A fronte del sistema suddetto occorre gestire la possibilità di accendere in tale griglia
+i punti che possano rappresentare diverse figure geometriche.
