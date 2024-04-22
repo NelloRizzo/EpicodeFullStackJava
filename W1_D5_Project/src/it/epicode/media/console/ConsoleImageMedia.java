@@ -2,6 +2,12 @@ package it.epicode.media.console;
 
 import it.epicode.media.ImageMedia;
 
+/**
+ * Un'immagine che viene visualizzata in console.
+ * 
+ * @author Nello Rizzo
+ *
+ */
 public class ConsoleImageMedia extends ImageMedia {
 
 	public ConsoleImageMedia(String title) {

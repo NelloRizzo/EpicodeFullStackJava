@@ -2,6 +2,11 @@ package it.epicode.media.console;
 
 import it.epicode.media.AudioMedia;
 
+/**
+ * Un audio che viene visualizzato in console.
+ * @author Nello Rizzo
+ *
+ */
 public class ConsoleAudioMedia extends AudioMedia {
 
 	public ConsoleAudioMedia(String title, int duration) {

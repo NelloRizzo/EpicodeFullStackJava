@@ -1,10 +1,27 @@
 package it.epicode.media;
 
+/**
+ * Un video.
+ * 
+ * @author Nello Rizzo
+ *
+ */
 public abstract class VideoMedia extends PlayableMedia implements HasBrightness, HasVolume {
-
+	/**
+	 * Memorizza il controllo del volume.
+	 */
 	private final Control volume;
+	/**
+	 * Memorizza il controllo della luminosità.
+	 */
 	private final Control brightness;
 
+	/**
+	 * Costruttore.
+	 * 
+	 * @param title    il titolo.
+	 * @param duration la durata.
+	 */
 	public VideoMedia(String title, int duration) {
 		super(title, duration);
 		this.volume = new Control(0, 10, 5, '|');

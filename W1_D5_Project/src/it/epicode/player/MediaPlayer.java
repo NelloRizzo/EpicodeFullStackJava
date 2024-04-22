@@ -6,14 +6,33 @@ import it.epicode.media.Media;
 import it.epicode.media.Playable;
 import it.epicode.media.Showable;
 
+/**
+ * Una implementazione di un mediaplayer.
+ * 
+ * @author Nello Rizzo
+ *
+ */
 public class MediaPlayer {
 
+	/**
+	 * Memorizza gli elementi multimediali.
+	 */
 	private final Media[] media;
 
+	/**
+	 * Costruttore.
+	 * 
+	 * @param media gli elementi multimediali da riprodure.
+	 */
 	public MediaPlayer(Media[] media) {
 		this.media = media;
 	}
 
+	/**
+	 * Mostra il menu e riproduce.
+	 * 
+	 * @param scanner serve per l'input da tastiera.
+	 */
 	public void menu(Scanner scanner) {
 		int count = media.length;
 		for (int i = 0; i < count; ++i) {

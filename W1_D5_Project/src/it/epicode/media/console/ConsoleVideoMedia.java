@@ -2,8 +2,20 @@ package it.epicode.media.console;
 
 import it.epicode.media.VideoMedia;
 
+/**
+ * Un video che viene visualizzato in console.
+ * 
+ * @author Nello Rizzo
+ *
+ */
 public class ConsoleVideoMedia extends VideoMedia {
 
+	/**
+	 * Costruttore.
+	 * 
+	 * @param title    il titolo.
+	 * @param duration la durata.
+	 */
 	public ConsoleVideoMedia(String title, int duration) {
 		super(title, duration);
 		// TODO Auto-generated constructor stub
