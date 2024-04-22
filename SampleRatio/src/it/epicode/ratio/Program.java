@@ -1,5 +1,8 @@
 package it.epicode.ratio;
 
+import javax.annotation.processing.SupportedSourceVersion;
+import javax.swing.plaf.synth.SynthOptionPaneUI;
+
 public class Program {
 
 //	
@@ -32,23 +35,34 @@ public class Program {
 		r1.signum = -1;
 		System.out.println(r1.signum + " " + r1.numerator + "/" + r1.denominator);
 		System.out.println(r1.asString());
-		Ratio r2 = new Ratio(1,-3);
+		Ratio r2 = new Ratio(1, -3);
 		System.out.println(r2.asString());
 		Ratio r3 = new Ratio(0.5f);
 		System.out.println(r3.asString());
 		Ratio r4 = r2.add(r3);
 		System.out.println(r4.asString());
-		
+
 		System.out.println(Ratio.half.asString());
-		
-		Ratio a = new Ratio(1,2);
-		Ratio b = new Ratio(1,2);
+
+		Ratio a = new Ratio(1, 2);
+		Ratio b = new Ratio(1, 2);
 		System.out.println(a.asString());
 		System.out.println(b.asString());
-		if (a == b) 
+		if (a == b)
 			System.out.println("a e b sono uguali");
 		else
 			System.out.println("a e b sono diversi");
+
+		Ratio norm = new Ratio(3, 4);
+		System.out.println(norm);
+		try {
+			Ratio err = new Ratio(1, 0);
+			System.out.println(err);
+		} catch (DenominatorIsZeroException ex) {
+			System.out.println("Sembra che ci sia un problema:");
+			System.out.println(ex.getMessage());
+		}
+		System.out.println("Fine dell'applicazione");
 	}
 
 }

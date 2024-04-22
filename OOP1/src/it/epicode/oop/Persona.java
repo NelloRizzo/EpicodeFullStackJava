@@ -36,25 +36,25 @@ public class Persona {
 
 	// Setter
 	public void setNumeroFigli(int n) {
-		if (n < 0)
-			n = -n;
-		numeroFigli = n;
-	}
-
-	public Persona() {
-		nome = "N/A";
-		cognome = "N/A";
+		try {
+			if (n < 0)
+				throw new NumeroFigliNegativoException();
+			numeroFigli = n;
+		} finally {
+			System.out.println("Questa istruzione è fondamentale per il funzionametno del sistema");
+		}
 	}
 
 	public Persona(String n, String c) {
-		System.out.println("Costruttore di Persona");
-		nome = n;
-		cognome = c;
+		this(n, c, Gender.Male);
 	}
 
 	public Persona(String n, String c, Gender g) {
-		System.out.println("Costruttore di Persona");
+		if (n.length() == 0)
+			throw new NomeNulloException();
 		nome = n;
+		if (c.length() == 0)
+			throw new CognomeNulloException();
 		cognome = c;
 		gender = g;
 	}
@@ -63,4 +63,11 @@ public class Persona {
 		System.out.print("Mi chiamo " + nome + " " + cognome);
 		System.out.println(" e sono: " + (gender == Gender.Male ? "uomo" : "donna"));
 	}
+
+	@Override
+	public String toString() {
+		return String.format("Persona [nome=%s, cognome=%s, gender=%s, numeroFigli=%s]", nome, cognome, gender,
+				numeroFigli);
+	}
+
 }

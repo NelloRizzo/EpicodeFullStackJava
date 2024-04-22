@@ -16,7 +16,8 @@ public class Ratio {
 
 	Ratio(int numerator, int denominator) {
 		if (denominator == 0)
-			denominator = 1;
+			throw new DenominatorIsZeroException("Hai specificato un denominatore pari a zero");
+		
 		int s = numerator * denominator;
 		signum = s > 0 ? 1 : -1;
 		this.numerator = numerator > 0 ? numerator : -numerator;
@@ -66,5 +67,10 @@ public class Ratio {
 		if (denominator != 1)
 			result += "/" + denominator;
 		return result;
+	}
+	
+	@Override
+	public String toString() {
+		return asString();
 	}
 }

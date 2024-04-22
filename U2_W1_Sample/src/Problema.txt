@@ -1,0 +1,8 @@
+Gestire un mazzo di carte da gioco
+
+Cosa si intende per "carta da gioco"?
+Una carta da gioco è rappresentata da
+un elemento che può avere un seme e un valore.
+
+Cosa di intende per "mazzo di carte"?
+Un mazzo di carte è un insieme di carte da gioco.
