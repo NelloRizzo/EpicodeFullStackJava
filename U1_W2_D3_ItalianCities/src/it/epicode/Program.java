@@ -5,6 +5,8 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Program {
 
@@ -16,7 +18,7 @@ public class Program {
 				.skip(3) // salto le prime tre righe
 				.map(l -> l.split(";")) // entra la linea esce un array con i campi (separati con ;)
 				// .map(a -> a[5] + " (" + a[14] + ")") // prendo solo il 6^ elemento e il 15^
-				.map(a -> new City(a[5], a[14])) // creo una istanza di classe City
+				.map(a -> new City(a[5], a[14], a[11])) // creo una istanza di classe City
 				.toList() // creo una lista di città!!!!!!
 		;
 
@@ -25,14 +27,22 @@ public class Program {
 
 		System.out.println("Province italiane:");
 		cities.stream() // apro uno stream sulla lista precedente
-				.map(c -> c.getAcronym()) // per ogni City recupero la sigla
+				.map(c -> c.getProvince()) // per ogni City recupero la provincia
 				.distinct() // escludo i duplicati
 				.sorted() // ordino alfabeticamente le stringhe
-				.forEach(System.out::println) // stampo le province italiane
+				.map(s -> s.toUpperCase()).forEach(System.out::println) // stampo le province italiane
 		;
 
 		System.out.println("Città in provincia di Roma:");
-		cities.stream().filter(c -> c.getAcronym().equals("RM")).forEach(System.out::println);
+		cities.stream().filter(c -> c.getAcronym().equals("RM")).sorted().forEach(System.out::println);
+
+		System.out.println("Città organizzate per provincia:");
+		cities.stream() // apro lo stream
+				.collect(Collectors.groupingBy(c -> c.getProvince())) // raggruppo per provincia in una Map
+				.entrySet() // prendo gli elementi della mappa come lista
+				.stream() // apro un altro stream
+				.sorted(Map.Entry.comparingByKey()) // ordino sulla base della chiave
+				.forEach(e -> System.out.format("%-30s\t%d%n", e.getKey(), e.getValue().size()));
 	}
 
 }
