@@ -58,7 +58,11 @@ public class Program {
 		var products = new ArrayList<Product>(generateProducts(15));
 		var orders = generateOrders(15, products, customers);
 
+<<<<<<< HEAD
 		System.out.println("***** Books con prezzo > 100: ");
+=======
+		System.out.println("***** Books: ");
+>>>>>>> 67a37c6556a1b1954a63405b2a77bf408ef0a53d
 		products.stream() //
 				.filter(p -> p.getCategory().equals("Books")) // ricerca per categoria in prodotti
 				.filter(p -> p.getPrice() > 100) // prezzo > 100
