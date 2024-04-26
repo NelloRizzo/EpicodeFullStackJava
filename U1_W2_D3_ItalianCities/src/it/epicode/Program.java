@@ -1,5 +1,6 @@
 package it.epicode;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -8,11 +9,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import org.apache.commons.io.FileUtils;
+
 public class Program {
 
 	static final Path file = Path.of("E:/Codice/EpicodeFS0124/Workspace/U1_W2_D3_ItalianCities", //
 			"comuni.csv");
 
+	@SuppressWarnings("deprecation")
 	public static void main(String[] args) throws IOException {
 		List<City> cities = Files.lines(file, StandardCharsets.ISO_8859_1) //
 				.skip(3) // salto le prime tre righe
@@ -43,6 +47,21 @@ public class Program {
 				.stream() // apro un altro stream
 				.sorted(Map.Entry.comparingByKey()) // ordino sulla base della chiave
 				.forEach(e -> System.out.format("%-30s\t%d%n", e.getKey(), e.getValue().size()));
+
+		var content = cities.stream() // apro uno stream sulla lista precedente
+				.map(c -> c.getProvince()) // per ogni City recupero la provincia
+				.distinct() // escludo i duplicati
+				.sorted() // ordino alfabeticamente le stringhe
+				.map(s -> s.toUpperCase())
+				.collect(Collectors.joining("\n", "Elenco delle province italiane:\n", "\nFine."));
+		File output = new File("./test.txt");
+		//FileUtils.writeStringToFile(output, content);
+		var provinces = cities.stream() // apro uno stream sulla lista precedente
+				.map(c -> c.getProvince()) // per ogni City recupero la provincia
+				.distinct() // escludo i duplicati
+				.sorted() // ordino alfabeticamente le stringhe
+				.map(s -> s.toUpperCase()).toList();
+		FileUtils.writeLines(output, provinces);
 	}
 
 }
