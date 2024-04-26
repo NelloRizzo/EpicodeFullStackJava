@@ -39,6 +39,7 @@ public class City {
 	}
 
 	public City(Long id, String name, String acronym, String province) {
+		this.id = id;
 		this.name = name;
 		this.acronym = acronym;
 		this.province = province;
@@ -46,6 +47,6 @@ public class City {
 
 	@Override
 	public String toString() {
-		return String.format("City(id=%d, name=%s, province=%s, acronym=%s)", name, province, acronym);
+		return String.format("City(id=%d, name=%s, province=%s, acronym=%s)", id, name, province, acronym);
 	}
 }

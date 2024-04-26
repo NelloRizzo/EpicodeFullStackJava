@@ -1,0 +1,3 @@
+Occorre implementare la possibilità di gestire un elenco di
+città, in maniera da poterlo recuperare in sessioni diverse (persistenza dei dati),
+potendo <aggiungere>, <eliminare> e <leggere> le città mantenute.
