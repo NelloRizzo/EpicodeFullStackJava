@@ -24,7 +24,6 @@ public class Program {
 		var aglie = service.getCities().stream() //
 				.filter(c -> c.getId() == 1001).findFirst().orElseThrow();
 		service.deleteCity(aglie);
-
 	}
 
 }
