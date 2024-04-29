@@ -1,4 +1,4 @@
-package it.epicde.exceptions;
+package it.epicode.exceptions;
 
 public class LibraryException extends RuntimeException {
 	private static final long serialVersionUID = 1L;

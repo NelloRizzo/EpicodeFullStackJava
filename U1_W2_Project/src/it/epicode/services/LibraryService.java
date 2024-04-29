@@ -3,8 +3,8 @@ package it.epicode.services;
 import java.util.List;
 import java.util.Optional;
 
-import it.epicde.data.Book;
-import it.epicde.data.Item;
+import it.epicode.data.Book;
+import it.epicode.data.Item;
 
 /**
  * Servizio di gestione della libreria. L'interfaccia {@code AutoCloseable}

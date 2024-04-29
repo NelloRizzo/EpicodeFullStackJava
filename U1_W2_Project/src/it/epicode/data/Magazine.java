@@ -1,9 +1,9 @@
-package it.epicde.data;
+package it.epicode.data;
 
 import java.util.Date;
 
-import it.epicde.exceptions.InvalidFieldsCountLibraryException;
-import it.epicde.exceptions.LibraryException;
+import it.epicode.exceptions.InvalidFieldsCountLibraryException;
+import it.epicode.exceptions.LibraryException;
 
 /**
  * 

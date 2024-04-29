@@ -1,4 +1,4 @@
-package it.epicde.data;
+package it.epicode.data;
 
 /**
  * Periodicità di una rivista.

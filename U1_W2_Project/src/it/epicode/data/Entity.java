@@ -1,10 +1,10 @@
-package it.epicde.data;
+package it.epicode.data;
 
 import java.util.Date;
 
-import it.epicde.exceptions.DataMismatchLibraryException;
-import it.epicde.exceptions.InvalidFieldsCountLibraryException;
-import it.epicde.exceptions.LibraryException;
+import it.epicode.exceptions.DataMismatchLibraryException;
+import it.epicode.exceptions.InvalidFieldsCountLibraryException;
+import it.epicode.exceptions.LibraryException;
 
 /**
  * Classe di base per tutte le entità gestite.

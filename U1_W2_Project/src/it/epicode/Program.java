@@ -1,4 +1,4 @@
-package it.epicde;
+package it.epicode;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -12,10 +12,10 @@ import java.util.stream.LongStream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import it.epicde.data.Book;
-import it.epicde.data.Frequency;
-import it.epicde.data.Magazine;
-import it.epicde.exceptions.ItemNotFoundException;
+import it.epicode.data.Book;
+import it.epicode.data.Frequency;
+import it.epicode.data.Magazine;
+import it.epicode.exceptions.ItemNotFoundException;
 import it.epicode.services.FileLibraryService;
 import it.epicode.services.LibraryService;
 

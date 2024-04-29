@@ -13,9 +13,9 @@ import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import it.epicde.data.Book;
-import it.epicde.data.Item;
-import it.epicde.exceptions.ItemNotFoundException;
+import it.epicode.data.Book;
+import it.epicode.data.Item;
+import it.epicode.exceptions.ItemNotFoundException;
 
 /**
  * Un servizio di gestione della libreria che usa il file system come endpoint

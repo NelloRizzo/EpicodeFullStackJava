@@ -1,4 +1,4 @@
-package it.epicde.exceptions;
+package it.epicode.exceptions;
 
 /**
  * 
