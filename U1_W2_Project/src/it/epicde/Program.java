@@ -20,35 +20,45 @@ import it.epicode.services.FileLibraryService;
 import it.epicode.services.LibraryService;
 
 public class Program {
+	// il gestore dei log
 	private static final Logger logger = LoggerFactory.getLogger(Program.class);
+	// il generatore di numeri casuali
 	private static final Random rnd = new Random();
 
-	private static final List<String> authors = IntStream.range(1, 11) //
+	// una lista di autori random
+	private static final List<String> authors = IntStream.range(1, 11) // [1..10]
+			// per ogni numero crea un autore che si chiama Author N
 			.mapToObj(n -> String.format("Author %d", n)) //
+			// converte in lista
 			.toList();
 
-	private static final List<String> categories = IntStream.range(1, 11) //
+	// una lista di categorie random
+	private static final List<String> categories = IntStream.range(1, 11) // [1..10]
+			// n categorie di nome Category N
 			.mapToObj(n -> String.format("Category %d", n)) //
+			// converte in lista
 			.toList();
 
+	// un codice ISBN a caso
 	private static String randomISBN() {
-		return "00000000".chars() //
-				.map(n -> n + rnd.nextInt(10)) //
-				.mapToObj(c -> "" + (char) c) //
-				.collect(Collectors.joining(""));
+		return "00000000".chars() // prende una stringa e apre uno stream sui suoi caratteri
+				.map(n -> n + rnd.nextInt(10)) // x ogni codice di carattere aggiunge un valore a caso tra o e 9
+				.mapToObj(c -> "" + (char) c) // trasforma il numero ottenuto in char
+				.collect(Collectors.joining("")); // ricostruisce la stringa con tutti i caratteri ottenuti
 	}
 
+	// una lista di libri casuali
 	private static List<Book> randomBooks(int count) {
-		return LongStream.range(1, count + 1) //
+		return LongStream.range(1, count + 1) // [1..count]
 				.mapToObj(n -> new Book(n, // id
 						new Date(), // data di creazione
 						randomISBN(), // isbn
 						String.format("Book %d", n), // titolo
 						rnd.nextInt(1800, 2024), // anno di pubblicazione
 						rnd.nextInt(50, 4000), // pagine
-						authors.get(rnd.nextInt(authors.size())), //
-						categories.get(rnd.nextInt(categories.size()))))
-				.toList();
+						authors.get(rnd.nextInt(authors.size())), // autore a caso
+						categories.get(rnd.nextInt(categories.size())) // categoria a caso
+				)).toList();
 	}
 
 	private static List<Magazine> randomMagazine(int count) {
@@ -59,12 +69,16 @@ public class Program {
 						String.format("Magazine %d", n), // titolo
 						rnd.nextInt(1800, 2024), // anno di pubblicazione
 						rnd.nextInt(50, 4000), // pagine
+						// la enum ha una proprietà values() che restituisce tutti i possibili valori
+						// la istruzione seguente ne prende uno a caso
 						Frequency.values()[rnd.nextInt(0, Frequency.values().length)]))
 				.toList();
 	}
 
+	// controlla se sul database ci sono dati
 	static void ensureData(LibraryService service) {
 		if (!Files.exists(Path.of("./library.csv"))) {
+			// se il file non esiste aggiunge 10 libri e 10 riviste
 			randomBooks(10).forEach(b -> service.add(b));
 			randomMagazine(10).forEach(m -> service.add(m));
 		}
@@ -73,6 +87,7 @@ public class Program {
 	public static void main(String[] args) {
 		try (LibraryService service = new FileLibraryService()) {
 			ensureData(service);
+			// tutti i dati
 			service.getAll().forEach(i -> logger.debug("{}", i));
 
 			logger.debug("Tentativo di cancellare un elemento che non esiste");

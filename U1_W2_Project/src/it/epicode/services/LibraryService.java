@@ -7,7 +7,10 @@ import it.epicde.data.Book;
 import it.epicde.data.Item;
 
 /**
- * Servizio di gestione della libreria.
+ * Servizio di gestione della libreria. L'interfaccia {@code AutoCloseable}
+ * mette a disposizione un meccanismo standard di pulizia delle risorse
+ * attraverso un metodo {@code close()} che viene richiamato automaticamente
+ * quando l'oggetto che lo usa esce fuori dal proprio ambito di visibilità.
  * 
  * @author Nello
  *

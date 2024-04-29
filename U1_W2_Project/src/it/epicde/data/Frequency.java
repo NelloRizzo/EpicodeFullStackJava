@@ -1,5 +1,20 @@
 package it.epicde.data;
 
+/**
+ * Periodicità di una rivista.
+ *
+ */
 public enum Frequency {
-	Weekly, Monthly, Biannual
+	/**
+	 * Settimanale.
+	 */
+	Weekly,
+	/**
+	 * Mensile.
+	 */
+	Monthly,
+	/**
+	 * Semestrale.
+	 */
+	Biannual
 }

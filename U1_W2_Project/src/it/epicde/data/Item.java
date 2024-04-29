@@ -5,6 +5,10 @@ import java.util.Date;
 import it.epicde.exceptions.InvalidFieldsCountLibraryException;
 import it.epicde.exceptions.LibraryException;
 
+/**
+ * Un elemento mantenuto in libreria.
+ *
+ */
 public class Item extends Entity {
 	private String isbn;
 	private String title;
@@ -22,18 +26,33 @@ public class Item extends Entity {
 		this.pages = pages;
 	}
 
+	/**
+	 * @return il codice ISBN.
+	 */
 	public String getIsbn() {
 		return isbn;
 	}
 
+	/**
+	 * 
+	 * @return il titolo.
+	 */
 	public String getTitle() {
 		return title;
 	}
 
+	/**
+	 * 
+	 * @return l'anno di pubblicazione.
+	 */
 	public int getPubYear() {
 		return pubYear;
 	}
 
+	/**
+	 * 
+	 * @return il numero di pagine.
+	 */
 	public int getPages() {
 		return pages;
 	}
@@ -78,6 +97,7 @@ public class Item extends Entity {
 		} catch (NumberFormatException e) {
 			throw new LibraryException(e);
 		}
+		// questa classe gestisce 4 attributi più quelli della sua superclasse 
 		return i + 4;
 	}
 }

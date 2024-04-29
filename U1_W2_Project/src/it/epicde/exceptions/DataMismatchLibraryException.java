@@ -1,5 +1,10 @@
 package it.epicde.exceptions;
 
+/**
+ * 
+ * Segnala un tipo errato di dato nel file.
+ *
+ */
 public class DataMismatchLibraryException extends LibraryException {
 	private static final long serialVersionUID = 1L;
 

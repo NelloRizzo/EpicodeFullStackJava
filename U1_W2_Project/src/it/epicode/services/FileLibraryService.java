@@ -17,17 +17,31 @@ import it.epicde.data.Book;
 import it.epicde.data.Item;
 import it.epicde.exceptions.ItemNotFoundException;
 
+/**
+ * Un servizio di gestione della libreria che usa il file system come endpoint
+ * per la persistenza delle informazioni.
+ * 
+ * @author Nello
+ *
+ */
 public class FileLibraryService implements LibraryService, AutoCloseable {
+	// il gestore dei log
 	private static final Logger logger = LoggerFactory.getLogger(LibraryService.class);
+	// il nome del file di storage
 	private static final String FILE_NAME = "./library.csv";
+	// l'indice del prossimo elemento inserito in biblioteca (chiave)
 	private static long counter = 0;
 
+	// il contenuto della biblioteca
 	private final List<Item> items = new ArrayList<>();
 
 	public FileLibraryService() {
 		load();
 	}
 
+	/**
+	 * Salva la biblioteca sul file di storage.
+	 */
 	private void persist() {
 		try {
 			logger.debug("Writing {} items in {}", items.size(), FILE_NAME);
@@ -38,6 +52,9 @@ public class FileLibraryService implements LibraryService, AutoCloseable {
 		}
 	}
 
+	/**
+	 * Carica la biblioteca dal file di storage.
+	 */
 	private void load() {
 		if (!Files.exists(Path.of(FILE_NAME)))
 			return;

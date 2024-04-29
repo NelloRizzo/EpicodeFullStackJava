@@ -5,6 +5,11 @@ import java.util.Date;
 import it.epicde.exceptions.InvalidFieldsCountLibraryException;
 import it.epicde.exceptions.LibraryException;
 
+/**
+ * 
+ * Una rivista.
+ *
+ */
 public class Magazine extends Item {
 	private Frequency frequency;
 
@@ -16,6 +21,10 @@ public class Magazine extends Item {
 		this.frequency = frequency;
 	}
 
+	/**
+	 * 
+	 * @return la periodicità.
+	 */
 	public Frequency getFrequency() {
 		return frequency;
 	}
@@ -47,6 +56,8 @@ public class Magazine extends Item {
 		} catch (NumberFormatException e) {
 			throw new LibraryException(e);
 		}
+		// questa classe gestisce solo 1 attributo oltre a quelli della classe
+		// precedente.
 		return i + 1;
 	}
 

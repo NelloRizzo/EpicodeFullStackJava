@@ -6,6 +6,10 @@ import it.epicde.exceptions.DataMismatchLibraryException;
 import it.epicde.exceptions.InvalidFieldsCountLibraryException;
 import it.epicde.exceptions.LibraryException;
 
+/**
+ * Classe di base per tutte le entità gestite.
+ *
+ */
 public class Entity {
 	private Long id;
 	private Date createdAt;
@@ -18,10 +22,17 @@ public class Entity {
 		this.createdAt = createdAt;
 	}
 
+	/**
+	 * @return la chiave dell'entità.
+	 */
 	public Long getId() {
 		return id;
 	}
 
+	/**
+	 * 
+	 * @return la data di inserimento nel database.
+	 */
 	public Date getCreatedAt() {
 		return createdAt;
 	}
@@ -39,10 +50,21 @@ public class Entity {
 		return String.format("Entity(id=%s, createdAt=%s)", id, createdAt);
 	}
 
+	/**
+	 * Salva in formato CSV i dati gestiti da questa classe.
+	 * 
+	 * @return le informazioni dell'istanza in formato CSV.
+	 */
 	public String toCsv() {
 		return String.format("%s;%d;%d", getClass().getCanonicalName(), id, createdAt.getTime());
 	}
 
+	/**
+	 * Recupera i dati della classe da un CSV.
+	 * 
+	 * @param csv la stringa dalla quale leggere.
+	 * @return l'indice della prossima porzione di stringa da processare.
+	 */
 	public int fromCsv(String csv) {
 		var parts = csv.split(";");
 		// controlla che sta leggendo un dato della giusta classe!
@@ -56,6 +78,7 @@ public class Entity {
 		} catch (NumberFormatException e) {
 			throw new LibraryException(e);
 		}
+		// questa classe ha 3 informazioni gestite
 		return 3;
 	};
 

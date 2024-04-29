@@ -1,5 +1,10 @@
 package it.epicde.exceptions;
 
+/**
+ * 
+ * Segnala che l'elemento cercato non esiste.
+ *
+ */
 public class ItemNotFoundException extends LibraryException {
 	private static final long serialVersionUID = 1L;
 
@@ -10,6 +15,10 @@ public class ItemNotFoundException extends LibraryException {
 		this.isbn = isbn;
 	}
 
+	/**
+	 * 
+	 * @return il codice ISBN cercato.
+	 */
 	public String getIsbn() {
 		return isbn;
 	}

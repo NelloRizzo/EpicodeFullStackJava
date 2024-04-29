@@ -4,6 +4,10 @@ import java.util.Date;
 
 import it.epicde.exceptions.InvalidFieldsCountLibraryException;
 
+/**
+ * Un libro
+ *
+ */
 public class Book extends Item {
 	private String author;
 	private String category;
@@ -18,10 +22,16 @@ public class Book extends Item {
 		this.category = genre;
 	}
 
+	/**
+	 * @return l'autore del libro.
+	 */
 	public String getAuthor() {
 		return author;
 	}
 
+	/**
+	 * @return la categoria del libro.
+	 */
 	public String getCategory() {
 		return category;
 	}
