@@ -40,6 +40,8 @@ public class JpaEventDao implements EventDao {
 
 	@Override
 	public Optional<Event> getById(long id) {
+		// Event.class indica di cercare nella tabella che memorizza Event
+		// il secondo parametro è l'id da cercare
 		var event = em.find(Event.class, id);
 		if (event == null) // se non è stato trovato l'evento...
 			return Optional.empty(); // restituisce un Optional vuoto

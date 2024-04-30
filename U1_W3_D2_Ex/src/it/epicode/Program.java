@@ -57,7 +57,6 @@ public class Program {
 						// (1) altrimenti esegui la seconda lambda
 					() -> log.debug("Ops... non ho trovato l'elemento"));
 			;
-
 		} catch (Exception e) {
 			log.error("Exception in main()", e);
 		}
