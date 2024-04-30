@@ -15,4 +15,7 @@
 	<logger name="org.hibernate" level="error">
 		<appender-ref ref="STDOUT"/>
 	</logger>
+	<logger name="org.jboss" level="error">
+		<appender-ref ref="STDOUT"/>
+	</logger>
 </configuration>
