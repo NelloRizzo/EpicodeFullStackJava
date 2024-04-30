@@ -38,10 +38,10 @@ public class Program {
 			// e la avvia
 			trans.begin();
 			// attraversa la lista delle città
-		/*	cities.forEach(c -> {
+			cities.forEach(c -> {
 				em.persist(c); // e le salva una per una tramite l'entity manager
 				log.debug("Salvataggio di {}", c);
-			});*/
+			});
 			// rende effettive le modifiche sul database
 			trans.commit();
 			
