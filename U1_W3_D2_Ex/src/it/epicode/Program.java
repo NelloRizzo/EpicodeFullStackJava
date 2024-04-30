@@ -34,10 +34,7 @@ public class Program {
 
 	public static void main(String[] args) {
 		int total = 50;
-<<<<<<< HEAD
 		// try-with-resource
-=======
->>>>>>> ca11cbd80e905530216a38b150637f9c5604dbe4
 		try (var dao = new JpaEventDao()) {
 			log.debug("Creo {} eventi a caso...", total);
 			// creo gli eventi e li salvo
