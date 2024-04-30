@@ -1,6 +1,5 @@
 package it.epicode;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.Date;
@@ -34,9 +33,11 @@ public class Program {
 	}
 
 	public static void main(String[] args) {
+		int total = 50;
 		try (var dao = new JpaEventDao()) {
+			log.debug("Creo {} eventi a caso...", total);
 			// creo gli eventi e li salvo
-			randomEvents(50).forEach(dao::save);
+			randomEvents(total).forEach(dao::save);
 			// recupero quello con id = 10
 			dao.getById(10).ifPresentOrElse( // (1) if present esegui la prima lambda...
 					// se l'elemento è stato trovato, è passato come parametro alla lambda
