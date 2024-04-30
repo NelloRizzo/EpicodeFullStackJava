@@ -85,6 +85,10 @@ public class Program {
 	}
 
 	public static void main(String[] args) {
+		// l'istruzione seguente si chiama try-with-resource
+		// viene usata con le classi che implementano l'interfaccia Autocloseable
+		// oltre ad intercettare gli errori, alla fine del try viene
+		// automaticamente richiamato il metodo close() 
 		try (LibraryService service = new FileLibraryService()) {
 			ensureData(service);
 			// tutti i dati
