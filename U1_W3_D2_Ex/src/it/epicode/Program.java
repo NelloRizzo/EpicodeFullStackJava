@@ -1,6 +1,7 @@
 package it.epicode;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.Date;
 import java.util.List;
@@ -16,7 +17,7 @@ import it.epicode.entities.EventType;
 public class Program {
 	private static final Logger log = LoggerFactory.getLogger(Program.class);
 	private static final Random rnd = new Random(1234);
-	private static final LocalDate now = LocalDate.now();
+	private static final LocalDateTime now = LocalDateTime.now();
 	private static final String lipsum = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vel eros sodales, maximus lorem sed, pulvinar est. Etiam elementum sed nisl a fringilla. Praesent consequat suscipit odio, eu volutpat augue tempor rutrum. Donec sed tellus eu diam porttitor.";
 
 	// crea eventi a caso...
@@ -25,7 +26,7 @@ public class Program {
 				.mapToObj(n -> new Event( //
 						String.format("Event %d", n), //
 						// da ora a 60 gg
-						Date.from(now.plusDays(rnd.nextLong(0, 60)).atStartOfDay().toInstant(ZoneOffset.UTC)), //
+						Date.from(now.plusDays(rnd.nextLong(0, 60)).toInstant(ZoneOffset.UTC)), //
 						lipsum.substring(0, rnd.nextInt(10, 255)), // da 10 fino al più 255 caratteri a caso...
 						EventType.values()[rnd.nextInt(2)], // un tipo di evento a caso
 						rnd.nextInt(1, 100))) // un numero massimo di partecipanti a caso fino a 100
