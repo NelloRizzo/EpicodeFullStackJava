@@ -23,6 +23,7 @@ public class Program {
 		log.debug("Ricerca avanzata (LIKE {}):", sample);
 		dao.getProvinceBySample(sample).forEach(p -> log.debug("{}", p));
 
+		log.debug("Conteggio di città nelle diverse province:");
 		dao.getCitiesCountByProvince().forEach((k, e) -> log.debug("{} -> {}", k, e));
 	}
 

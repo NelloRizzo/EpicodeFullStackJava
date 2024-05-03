@@ -150,8 +150,8 @@ public class JpaCityDao implements CityDao {
 		var result = new HashMap<String, Long>();
 		em.createNamedQuery(Queries.Cities.COUNT_BY_PROVINCE).getResultStream() //
 				.forEach(o -> {
-					var obj = (Object[]) o;
-					result.put(obj[0].toString(), (Long) obj[1]);
+					var array = (Object[]) o;
+					result.put(array[0].toString(), (Long) array[1]);
 				});
 		return result;
 	}

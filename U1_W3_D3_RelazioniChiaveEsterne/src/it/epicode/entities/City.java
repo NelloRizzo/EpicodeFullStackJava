@@ -10,7 +10,7 @@ import jakarta.persistence.NamedQuery;
 @NamedQuery(name = Queries.Cities.ALL, query = "SELECT c FROM City c")
 @NamedQuery(name = Queries.Cities.BY_PROVINCE, query = "SELECT c FROM City c WHERE c.province.acronym = :acronym")
 @NamedQuery(name = Queries.Cities.BY_ID, query = "SELECT c FROM City c WHERE c.id = :id")
-@NamedQuery(name = Queries.Cities.COUNT_BY_PROVINCE, query = "SELECT c.province.name, COUNT(c.id) FROM City c GROUP BY c.province.name ORDER BY c.province.name")
+@NamedQuery(name = Queries.Cities.COUNT_BY_PROVINCE, query = "SELECT c.province.name, COUNT(c.id) FROM City c GROUP BY c.province.name")
 @NamedQuery(name = Queries.Cities.COUNT, query = "SELECT COUNT(c.id) FROM City c")
 public class City extends BaseEntity {
 	@Column(length = 80, nullable = false)
