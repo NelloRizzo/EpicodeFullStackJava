@@ -45,7 +45,6 @@ public abstract class DaoImpl<T extends BaseEntity> implements Dao<T> {
 	@Override
 	public void close() throws Exception {
 		em.close();
-		emf.close();
 	}
 
 	@Override
