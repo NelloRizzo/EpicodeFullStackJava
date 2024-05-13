@@ -12,8 +12,10 @@ import it.epicode.pizza.entities.Pizza;
 import it.epicode.pizza.entities.Topping;
 import it.epicode.pizza.entities.XlPizza;
 
+// indica che la classe partecipa alla configurazione dell'applicazione
 @Configuration
 public class BeansConfiguration {
+	// crea un bean di JEE (non avendo specificato nulla, il bean sarà SINGLETON)
     @Bean(name = "toppings_tomato")
     Topping toppingTomatoBean() {
 		return new Topping("Tomato", 0, 0);

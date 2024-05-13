@@ -16,6 +16,7 @@ public class W1D1PizzeriaApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(W1D1PizzeriaApplication.class, args);
 
+		// try-with-resources (*)
 		try (var ctx = new AnnotationConfigApplicationContext(BeansConfiguration.class)) {
 			var menu = (Menu) ctx.getBean("menu");
 
@@ -23,6 +24,7 @@ public class W1D1PizzeriaApplication {
 			menu.printMenu(false);
 			log.info("Menu XL:");
 			menu.printMenu(true);
+			// (*) qui chiude automaticamente il context richiamando ctx.close()
 		} catch (BeansException e) {
 			log.error("Exception in main()", e);
 		}
