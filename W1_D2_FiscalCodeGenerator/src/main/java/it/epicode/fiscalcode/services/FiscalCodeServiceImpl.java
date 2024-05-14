@@ -10,15 +10,15 @@ import it.epicode.fiscalcode.entities.PersonalData;
 @Component
 public class FiscalCodeServiceImpl implements FiscalCodeService {
 
-//	 * è composto dai seguenti blocchi:
-//	 * 
-//	 * - 3 lettere per il cognome 
-//	 * - 3 lettere per il nome 
-//	 * - l'anno di nascita (numero) 
-//	 * - il mese della data di nascita (lettera) 
-//	 * - il giorno della data di nascita (numero) 
-//	 * - il codice del comune di nascita 
-//	 * - il carattere di controllo
+	//	 * è composto dai seguenti blocchi:
+	//	 * 
+	//	 * - 3 lettere per il cognome 
+	//	 * - 3 lettere per il nome 
+	//	 * - l'anno di nascita (numero) 
+	//	 * - il mese della data di nascita (lettera) 
+	//	 * - il giorno della data di nascita (numero) 
+	//	 * - il codice del comune di nascita 
+	//	 * - il carattere di controllo
 	@Override
 	public String generateFiscalCode(PersonalData data) {
 		String fc = handleLastName(data.getLastName()) + //
