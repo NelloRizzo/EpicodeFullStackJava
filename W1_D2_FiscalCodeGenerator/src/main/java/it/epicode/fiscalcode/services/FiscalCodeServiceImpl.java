@@ -21,12 +21,17 @@ public class FiscalCodeServiceImpl implements FiscalCodeService {
 	// * - il carattere di controllo
 	@Override
 	public String generateFiscalCode(PersonalData data) {
-		String fc = handleLastName(data.getLastName()) + //
-				handleFirstName(data.getFirstName()) + //
-				handleBirthday(data.getBirthday(), data.getGender()) + //
-				handleBirthCity(data.getBirthCity());
-		fc = fc + calculateCheckCode(fc);
-		return fc;
+//		String fc = handleLastName(data.getLastName()) + //
+//				handleFirstName(data.getFirstName()) + //
+//				handleBirthday(data.getBirthday(), data.getGender()) + //
+//				handleBirthCity(data.getBirthCity());
+		var fc = new StringBuilder() //
+				.append(handleLastName(data.getLastName())) //
+				.append(handleFirstName(data.getFirstName())) //
+				.append(handleBirthday(data.getBirthday(), data.getGender())) //
+				.append(handleBirthCity(data.getBirthCity()));
+		fc.append(calculateCheckCode(fc.toString()));
+		return fc.toString();
 	}
 
 	// Cognome
