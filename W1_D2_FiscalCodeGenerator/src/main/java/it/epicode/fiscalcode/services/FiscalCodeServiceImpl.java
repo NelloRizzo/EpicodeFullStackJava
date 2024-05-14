@@ -10,15 +10,15 @@ import it.epicode.fiscalcode.entities.PersonalData;
 @Component
 public class FiscalCodeServiceImpl implements FiscalCodeService {
 
-	//	 * è composto dai seguenti blocchi:
-	//	 * 
-	//	 * - 3 lettere per il cognome 
-	//	 * - 3 lettere per il nome 
-	//	 * - l'anno di nascita (numero) 
-	//	 * - il mese della data di nascita (lettera) 
-	//	 * - il giorno della data di nascita (numero) 
-	//	 * - il codice del comune di nascita 
-	//	 * - il carattere di controllo
+	// * è composto dai seguenti blocchi:
+	// *
+	// * - 3 lettere per il cognome
+	// * - 3 lettere per il nome
+	// * - l'anno di nascita (numero)
+	// * - il mese della data di nascita (lettera)
+	// * - il giorno della data di nascita (numero)
+	// * - il codice del comune di nascita
+	// * - il carattere di controllo
 	@Override
 	public String generateFiscalCode(PersonalData data) {
 		String fc = handleLastName(data.getLastName()) + //
@@ -40,8 +40,10 @@ public class FiscalCodeServiceImpl implements FiscalCodeService {
 	// spazi e considerare tutto come un cognome unico.
 	private String handleLastName(String lastName) {
 		var cv = new ConsonantsVowelsSeparator(lastName);
-		return (cv.getConsonants() + cv.getVowels() + "XXX") // creo uno stringone con consonanti + vocali + X
-				.substring(0, 3); // e di questo prendo solo i primi 3 caratteri
+		// creo uno stringone con consonanti + vocali + X
+		// return (cv.getConsonants().toString() + cv.getVowels().toString() + "XXX") //
+		// .substring(0, 3); // e di questo prendo solo i primi 3 caratteri
+		return String.format("%s%sXXX", cv.getConsonants(), cv.getVowels()).substring(0, 3);
 	}
 
 	// Per il nome il discorso è analogo con la particolarità che se il nome
@@ -55,11 +57,15 @@ public class FiscalCodeServiceImpl implements FiscalCodeService {
 	// Se il nome fosse composto da più nomi, bisogna considerarlo tutto assieme.
 	private String handleFirstName(String firstName) {
 		var cv = new ConsonantsVowelsSeparator(firstName);
-		var cons = cv.getConsonants();
-		if (cons.length() > 3) // se le consonanti sono più di 3
-			// devo scartare la seconda
-			cons = cons.substring(0, 1) + cons.substring(2);
-		return (cons + cv.getVowels() + "XXX").substring(0, 3);
+		// var cons = cv.getConsonants();
+		// if (cons.length() > 3) // se le consonanti sono più di 3
+		// // devo scartare la seconda
+		// cons = cons.substring(0, 1) + cons.substring(2);
+		if (cv.getConsonants().length() > 3) {
+			cv.getConsonants().delete(1, 2);
+		}
+		// return (cons + cv.getVowels() + "XXX").substring(0, 3);
+		return String.format("%s%sXXX", cv.getConsonants(), cv.getVowels()).substring(0, 3);
 	}
 
 	// Anno di nascita
@@ -116,7 +122,8 @@ public class FiscalCodeServiceImpl implements FiscalCodeService {
 			var depl = Character.isDigit(c) ? c - '0' : c - 'A';
 			sum += (i % 2 == 0) ? odds[depl] : depl;
 		}
-		// prendo la somma calcolo il risultao della divisione per 26 e lo trasformo in lettera
+		// prendo la somma calcolo il risultao della divisione per 26 e lo trasformo in
+		// lettera
 		return (char) (sum % 26 + 'A');
 	}
 }

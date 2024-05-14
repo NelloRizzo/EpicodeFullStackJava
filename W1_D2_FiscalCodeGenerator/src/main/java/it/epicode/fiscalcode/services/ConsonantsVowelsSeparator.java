@@ -10,12 +10,14 @@ public class ConsonantsVowelsSeparator {
 	 * Le consonanti contenute nel testo.
 	 */
 	@Getter
-	private String consonants = "";
+	// private String consonants = "";
+	private final StringBuilder consonants = new StringBuilder();
 	/**
 	 * Le vocali contenute nel testo.
 	 */
 	@Getter
-	private String vowels = "";
+	// private String vowels = "";
+	private final StringBuilder vowels = new StringBuilder();
 
 	/**
 	 * 
@@ -28,9 +30,9 @@ public class ConsonantsVowelsSeparator {
 				.forEach(c -> {
 					// controlla se si tratta di una vocale
 					if (c == 'A' || c == 'E' || c == 'I' || c == 'O' || c == 'U') {
-						vowels += c;
+						vowels.append(c);
 					} else { // altrimenti si tratta di una consonante
-						consonants += c;
+						consonants.append(c);
 					}
 				});
 	}
