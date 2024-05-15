@@ -1,0 +1,5 @@
+Occorre implementare un servizio che sia in grado di trasformare 
+dei numeri interi nella loro rappresentazione in italiano.
+
+Esempio:
+	1234 -> milleduecentotrentaquattro
