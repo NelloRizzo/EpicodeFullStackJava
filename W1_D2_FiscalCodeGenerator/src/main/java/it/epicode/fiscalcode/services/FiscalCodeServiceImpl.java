@@ -2,13 +2,27 @@ package it.epicode.fiscalcode.services;
 
 import java.time.LocalDate;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import it.epicode.fiscalcode.dao.CitiesDao;
+import it.epicode.fiscalcode.entities.City;
 import it.epicode.fiscalcode.entities.Gender;
 import it.epicode.fiscalcode.entities.PersonalData;
+import lombok.extern.slf4j.Slf4j;
 
 @Component
+@Scope("singleton")
+@Slf4j
 public class FiscalCodeServiceImpl implements FiscalCodeService {
+
+	@Autowired
+	CitiesDao dao;
+
+	public FiscalCodeServiceImpl() {
+		log.info("Chiamata al costruttore di FiscalCodeServiceImpl");
+	}
 
 	// * è composto dai seguenti blocchi:
 	// *
@@ -29,7 +43,7 @@ public class FiscalCodeServiceImpl implements FiscalCodeService {
 				.append(handleLastName(data.getLastName())) //
 				.append(handleFirstName(data.getFirstName())) //
 				.append(handleBirthday(data.getBirthday(), data.getGender())) //
-				.append(handleBirthCity(data.getBirthCity()));
+				.append(handleBirthCity(data.getBirthCity(), data.getBirthProvince()));
 		fc.append(calculateCheckCode(fc.toString()));
 		return fc.toString();
 	}
@@ -98,8 +112,9 @@ public class FiscalCodeServiceImpl implements FiscalCodeService {
 	// E' composto da quattro caratteri alfanumerici.
 	// E' il codice del comune rilevati dai volumi dei codici dei comuni italiani.
 	// Ci sono database che contengono tutti i comuni d'italia con relativi codici.
-	private String handleBirthCity(String birthCity) {
-		return birthCity.toUpperCase().substring(0, 4);
+	private String handleBirthCity(String birthCity, String birthProvince) {
+		return dao.getCityByNameAndProvinceAcronym(birthCity, birthProvince)
+				.orElse(City.builder().withCadastral("X000").build()).getCadastral();
 	}
 
 	// Si comincia con il prendere i caratteri del codice fiscale fin qui calcolato

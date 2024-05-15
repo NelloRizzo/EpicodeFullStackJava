@@ -13,23 +13,21 @@ import lombok.extern.slf4j.Slf4j;
 
 @Component
 @Slf4j
-public class FiscalCodeGeneratorRunner implements CommandLineRunner {
-
+public class OtherRunner implements CommandLineRunner {
 	@Autowired
 	FiscalCodeService service;
 
 	@Override
 	public void run(String... args) throws Exception {
-		var meloni = PersonalData.builder() //
-				.withBirthCity("Roma") //
-				.withBirthday(LocalDate.of(1977, 1, 15)) //
-				.withBirthProvince("RM") //
-				.withFirstName("Giorgia") //
+		var schlein = PersonalData.builder() //
+				.withBirthCity("Lugano") //
+				.withBirthday(LocalDate.of(1985, 5, 4)) //
+				.withBirthProvince("EE") //
+				.withFirstName("Elena Ethel") //
 				.withGender(Gender.FEMALE) //
-				.withLastName("Meloni").build();
-		log.info("{}", meloni);
-		var fc = service.generateFiscalCode(meloni);
-		log.info("Codice Fiscale: {}", fc);
-	}
+				.withLastName("Schlein").build();
+		log.info("{}", schlein);
+		var fc = service.generateFiscalCode(schlein);
+		log.info("Codice Fiscale: {}", fc);	}
 
 }
