@@ -1,5 +1,7 @@
 package it.epicode.contacts.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -17,6 +19,7 @@ public class Address {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private boolean work;
+	@JsonIgnore
 	@ManyToOne
 	private User owner;
 }
