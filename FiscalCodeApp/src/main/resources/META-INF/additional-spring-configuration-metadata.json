@@ -1,0 +1,9 @@
+{
+	"properties": [
+		{
+			"name": "cities.filename",
+			"type": "java.lang.String",
+			"description": "The name of .csv file containing cities data."
+		}
+	]
+}

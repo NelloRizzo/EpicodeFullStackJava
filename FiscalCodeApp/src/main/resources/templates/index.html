@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+<meta charset="utf-8">
+<title>Calcolo del Codice Fiscale</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+
+<body class="container">
+	<div class="card mt-5 bg-primary text-light">
+		<div class="card-header">
+			<h1 class="offset-2 col-8 text-center">Calcolo del Codice
+				Fiscale</h1>
+		</div>
+		<div class="card-body">
+			<div class="row">
+				<ul class="list-group offset-2 col-8" id="validation-summary"></ul>
+			</div>
+			<div class="mb-3 row">
+				<div class="offset-2 col-8">
+					<label class="form-label" for="firstName">Nome</label>
+					<div class="input-group row">
+						<input id="firstName" name="firstName" class="form-control">
+					</div>
+				</div>
+			</div>
+			<div class="mb-3 row">
+				<div class="offset-2 col-8">
+					<label class="form-label" for="lastName">Cognome</label>
+					<div class="input-group row">
+						<input id="lastName" name="lastName" class="form-control">
+					</div>
+				</div>
+			</div>
+			<div class="mb-3 row">
+				<div class="offset-2 col-8">
+					<label class="form-label" for="genderMale">Sesso</label>
+					<div class="form-check form-check-inline">
+						<input type="radio" id="genderMale" name="gender"
+							class="form-check-input" value="0" checked> <label
+							class="form-check-label" for="genderMale">M</label>
+					</div>
+					<div class="form-check form-check-inline">
+						<input type="radio" id="genderFemale" name="gender"
+							class="form-check-input" value="1"> <label
+							class="form-check-label" for="genderFemale">F</label>
+					</div>
+				</div>
+			</div>
+			<div class="mb-3 row">
+				<div class="offset-2 col-8">
+					<label class="form-label" for="birthday">Data di nascita</label>
+					<div class="input-group">
+						<input type="date" class="form-control" id="birthday"
+							name="birthday">
+					</div>
+				</div>
+			</div>
+			<div class="mb-3 row">
+				<div class="offset-2 col-8">
+					<label class="form-label" for="prov">Città di nascita</label>
+					<div class="input-group row">
+						<div class="col-4">
+							<select id="prov" name="prov" class="form-select"
+								aria-label="Province"></select>
+						</div>
+						<div class="col-8">
+							<select id="cities" class="form-select" aria-label="Città"></select>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="mb-3 row form-inline">
+				<div class="offset-4 col-4">
+					<button type="button" id="calc" class="btn btn-success">Calcola</button>
+					<button class="btn btn-light" type="reset">Pulisci</button>
+				</div>
+			</div>
+			<div class="row">
+				<div class="offset-2 col-8" id="result"></div>
+			</div>
+		</div>
+	</div>
+	<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+	<script>
+		function loadProvinces(id) {
+			$.ajax({
+				method : 'get',
+				url : 'http://localhost:8080/api/provinces',
+				success : function(data) {
+					$(data).each(
+							function(_, item) {
+								$('<option>').text(item.name).val(item.acronym)
+										.appendTo($(id))
+							})
+					loadCities($(data)[0].acronym)
+				},
+				error : function(e) {
+
+				}
+			})
+		}
+		function loadCities(acronym) {
+			let cities = $('#cities')
+			cities.empty()
+			$.ajax({
+				method : 'get',
+				url : `http://localhost:8080/api/cities/${acronym}`,
+				success : function(data) {
+					$(data).each(
+							function(_, item) {
+								$('<option>').text(item.name).val(item.id)
+										.appendTo(cities)
+							})
+				}
+			})
+		}
+
+		$(function() {
+			$("#validation-summary").hide()
+			$("#result").hide()
+			loadProvinces('#prov');
+			$('#prov').change(function() {
+				loadCities($(this).val())
+			})
+			$('#calc')
+					.click(
+							function() {
+								let data = {
+									'firstName' : $('#firstName').val(),
+									'lastName' : $('#lastName').val(),
+									'gender' : $('#genderMale').checked ? 1 : 0,
+									'birthday' : $('#birthday').val(),
+									'birthCityId' : $('#cities').val()
+								}
+								let errors = [];
+								if (!data.firstName)
+									errors.push("Inserire il nome")
+								if (!data.lastName)
+									errors.push("Inserire il cognome")
+								if (!data.birthday)
+									errors.push("Inserire la data di nascita")
+								$("#validation-summary").hide()
+								$("#validation-summary").empty()
+								if (errors.length) {
+									$(errors)
+											.each(
+													function(_, item) {
+														$(
+																"<li class='list-group-item list-group-item-danger'>")
+																.text(item)
+																.appendTo(
+																		$("#validation-summary"))
+													})
+									$("#validation-summary").show()
+								} else
+									$
+											.ajax({
+												method : 'post',
+												url : 'http://localhost:8080/api/fiscalcode',
+												contentType : "application/json; charset=utf-8",
+												data : JSON.stringify(data),
+												success : function(r) {
+													$("#result").text(r.fiscalCode).show()
+												}
+											})
+							})
+		})
+	</script>
+</body>
+
+</html>
