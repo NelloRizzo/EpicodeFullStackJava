@@ -24,7 +24,7 @@ public class AppExceptionHandler extends ResponseEntityExceptionHandler {
 	}
 
 	@ExceptionHandler(DuplicateKeyAppException.class)
-	protected ResponseEntity<?> handleApplicatioException(DuplicateKeyAppException e) {
+	protected ResponseEntity<?> handleApplicationException(DuplicateKeyAppException e) {
 		return new ResponseEntity<>(new ExceptionInfoModel(e.getMessage(), e.duplicateKey), //
 				HttpStatus.BAD_REQUEST);
 	}
