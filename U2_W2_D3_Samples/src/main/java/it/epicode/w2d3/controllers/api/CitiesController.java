@@ -1,0 +1,30 @@
+package it.epicode.w2d3.controllers.api;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import it.epicode.w2d3.entities.CityEntity;
+import it.epicode.w2d3.repositories.CitiesRepository;
+import lombok.extern.slf4j.Slf4j;
+
+@RestController
+@RequestMapping("/api/cities")
+@Slf4j
+public class CitiesController {
+
+	@Autowired
+	CitiesRepository cities;
+
+	@GetMapping
+	public ResponseEntity<Page<CityEntity>> getAllCities(Pageable p) {
+		log.info("{}", p);
+		var c = cities.findAll(p);
+		return new ResponseEntity<Page<CityEntity>>(c, HttpStatus.OK);
+	}
+}

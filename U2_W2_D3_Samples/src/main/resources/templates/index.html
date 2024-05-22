@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<title>Elenco delle città</title>
+</head>
+<body>
+
+	<h1>Elenco delle città italiane</h1>
+
+	<div>
+		<a href="#" id="first">Prima</a> <a href="#" id="prev">Precedente</a>
+		<span id="current"></span> di <span id="total"></span> <a href="#"
+			id="next">Prossima</a> <a href="#" id="last">Ultima</a>
+	</div>
+	<ol id="cities">
+	</ol>
+	<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+	<script>
+		function setPager(pageInfo) {
+			$("#total").text(pageInfo.totalPages)
+			$("#current").text(pageInfo.number)
+		}
+		function getCities(page) {
+			$.ajax({
+				method : "get",
+				url : `/api/cities?page=${page}`,
+				success : function(data) {
+					let content = data.content
+					$("#cities").empty()
+					$(content).each(
+							function(_, city) {
+								$("<li>").text(
+										city.name + " ("
+												+ city.province.acronym + ")")
+										.appendTo($("#cities"))
+							})
+					setPager(data)
+				}
+			})
+		}
+		$(function() {
+			getCities(0)
+			$("#first").click(function() {
+				getCities(0)
+			})
+			$("#prev").click(function() {
+				let current = parseInt($("#current").text())
+				getCities(current - 1)
+			})
+			$("#next").click(function() {
+				let current = parseInt($("#current").text())
+				getCities(current + 1)
+			})
+			$("#last").click(function() {
+				let last = parseInt($("#total").text())
+				getCities(last - 1)
+			})
+		})
+	</script>
+</body>
+</html>

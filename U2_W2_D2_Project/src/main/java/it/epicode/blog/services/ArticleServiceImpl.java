@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import it.epicode.blog.entities.Article;
 import it.epicode.blog.repositories.ArticlesRepository;
+import it.epicode.blog.utils.EntitiesUtils;
 import lombok.extern.slf4j.Slf4j;
 
 @Service
@@ -17,6 +18,9 @@ public class ArticleServiceImpl implements ArticleService {
 
 	@Autowired
 	ArticlesRepository articles;
+	
+	@Autowired
+	EntitiesUtils utils;
 
 	@Override
 	public List<Article> getArticles() {
@@ -38,9 +42,17 @@ public class ArticleServiceImpl implements ArticleService {
 
 	@Override
 	public Article update(Long articleId, Article article) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+		try {
+			var a = articles.findById(articleId).orElseThrow();
+			utils.copy(article, a);
+			return article;
+		} catch (NoSuchElementException e) {
+			log.error(String.format("Cannot find article with id = %s", articleId), e);
+			throw new RuntimeException("Cannot find article...");
+		} catch (Exception e) {
+			log.error(String.format("Error deleting article with id = %s", articleId), e);
+			throw new RuntimeException();
+		}	}
 
 	@Override
 	public Article delete(Long articleId) {
