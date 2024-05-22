@@ -9,6 +9,9 @@
 	<h1>Elenco delle città italiane</h1>
 
 	<div>
+		<span id="error"></span>
+	</div>
+	<div>
 		<a href="#" id="first">Prima</a> <a href="#" id="prev">Precedente</a>
 		<span id="current"></span> di <span id="total"></span> <a href="#"
 			id="next">Prossima</a> <a href="#" id="last">Ultima</a>
@@ -22,9 +25,13 @@
 			$("#current").text(pageInfo.number)
 		}
 		function getCities(page) {
+			$("#error").hide()
 			$.ajax({
 				method : "get",
 				url : `/api/cities?page=${page}`,
+				error : function(err) {
+					$("#error").text(err).show()
+				},
 				success : function(data) {
 					let content = data.content
 					$("#cities").empty()
