@@ -46,7 +46,7 @@ public class ArticlesController {
 	// PUT /blogPosts/123 -> id = 123
 	@PutMapping("{id}")
 	public ResponseEntity<Article> update(@PathVariable Long id, @RequestBody Article article) {
-		return null;
+		return new ResponseEntity<>(articles.update(id, article), HttpStatus.ACCEPTED);
 	}
 
 	// DELETE /blogPosts/123 -> id = 123

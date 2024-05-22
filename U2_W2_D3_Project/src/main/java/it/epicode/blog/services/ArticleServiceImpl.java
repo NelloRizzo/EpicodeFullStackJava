@@ -58,7 +58,7 @@ public class ArticleServiceImpl implements ArticleService {
 		try {
 			var a = articles.findById(articleId).orElseThrow();
 			utils.copy(article, a);
-			return article;
+			return articles.save(a);
 		} catch (NoSuchElementException e) {
 			log.error(String.format("Cannot find article with id = %s", articleId), e);
 			throw new RuntimeException("Cannot find article...");
