@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @Builder(setterPrefix = "with")
 public class MessageDto {
 	private long id;
+
 	private String recipient;
 	private String sender;
 	private String title;

@@ -38,8 +38,13 @@ public class MessageServiceImpl implements MessageService {
 					List.of(new FieldError("message", "recipient", "Il destinatario non esiste nel database"))));
 			// costruisce il messaggio
 			var msg = Message.builder() //
-					.withBody(message.getBody()).withFrom(sender).withRead(false) //
-					.withSentAt(LocalDateTime.now()).withTitle(message.getTitle()).withTo(recipient).build();
+					.withBody(message.getBody()) //
+					.withFrom(sender) //
+					.withRead(false) //
+					.withSentAt(LocalDateTime.now()) //
+					.withTitle(message.getTitle()) //
+					.withTo(recipient) //
+					.build();
 			// lo salva sul database
 			messages.save(msg);
 		} catch (ApiValidationException e) {
