@@ -31,7 +31,7 @@ public class MessagesController {
 	MessageService messages;
 
 	private static final String URI_UNIREST = "https://api.mailgun.net/v3/sandboxc985b9cf81fd46cebd6229bba0f14527.mailgun.org";
-	private static final String APIKEY_UNIREST = "953e9b148fc8cb0d68be03ca54e85f8a-a2dd40a3-21b93916";
+	private static final String APIKEY_UNIREST = "";
 	@PostMapping
 	public ResponseEntity<?> sendMessage(@RequestBody @Validated MessageRequest message, BindingResult validator) {
 		if (validator.hasErrors()) {
