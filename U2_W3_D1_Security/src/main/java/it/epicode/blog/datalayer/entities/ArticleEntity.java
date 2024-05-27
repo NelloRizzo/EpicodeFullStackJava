@@ -13,11 +13,13 @@ import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
+@EqualsAndHashCode(callSuper = false, onlyExplicitlyIncluded = true)
 @Entity
 @Table(name = "articles")
-public class ArticleEntity {
+public class ArticleEntity extends EntityBase {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "articles_seq")
 	@SequenceGenerator(name = "articles_seq", sequenceName = "articles_seq")
