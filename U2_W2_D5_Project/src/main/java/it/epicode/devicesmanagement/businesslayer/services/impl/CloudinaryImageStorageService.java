@@ -5,7 +5,6 @@ import java.io.IOException;
 import org.springframework.stereotype.Service;
 
 import com.cloudinary.Cloudinary;
-import com.cloudinary.Transformation;
 import com.cloudinary.utils.ObjectUtils;
 
 import it.epicode.devicesmanagement.businesslayer.services.ImageStorageService;
@@ -30,7 +29,6 @@ public class CloudinaryImageStorageService implements ImageStorageService {
 			log.info("Uploading image on Cloudinary");
 			var info = cloudinary.uploader().upload(imageBytes, params);
 			log.info("Image uploaded on Cloudinary");
-			log.info("{}", info);
 			return info.get("url").toString();
 		} catch (IOException e) {
 			log.error("Exception uploading image to Cloudinary", e);

@@ -1,5 +1,9 @@
 package it.epicode.devicesmanagement.businesslayer.dto;
 
+import org.springframework.web.multipart.MultipartFile;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -15,15 +19,18 @@ public class EmployeeDto extends BaseDto {
 	@EqualsAndHashCode.Include
 	private String email;
 	private String imagePicture;
+	@JsonIgnore
+	private MultipartFile file;
 
 	@Builder(setterPrefix = "with")
-	public EmployeeDto(Long id, String username, String firstName, String lastName, String email, String imagePicture) {
+	public EmployeeDto(Long id, String username, String firstName, String lastName, String email, String imagePicture, MultipartFile file) {
 		super(id);
 		this.username = username;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
 		this.imagePicture = imagePicture;
+		this.file = file;
 	}
 
 }
