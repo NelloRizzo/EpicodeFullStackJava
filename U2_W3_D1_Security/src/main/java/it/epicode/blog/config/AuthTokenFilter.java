@@ -32,7 +32,7 @@ public class AuthTokenFilter extends OncePerRequestFilter {
 			// legge lo header
 			// Authorization: Bearer TOKEN
 			var header = request.getHeader("Authorization");
-			if (header != null && header.startsWith("Bearer")) {
+			if (header != null && header.startsWith("Bearer")) { 
 				var token = header.substring(7);
 				log.info("Token: {}", token);
 				var username = jwt.getUsernameFromToken(token);

@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import it.epicode.blog.businesslayer.services.Mapper;
 import it.epicode.blog.businesslayer.services.UserService;
+import it.epicode.blog.businesslayer.services.dto.LoginResponseDto;
 import it.epicode.blog.businesslayer.services.dto.RegisterUserDto;
 import it.epicode.blog.businesslayer.services.dto.RegisteredUserDto;
 import it.epicode.blog.businesslayer.services.exceptions.InvalidLoginException;
@@ -44,21 +45,23 @@ public class UserServiceImpl implements UserService {
 	private JwtUtils jwt;
 
 	@Autowired
-	Mapper<RegisterUserDto, UserEntity> toEntity;
+	Mapper<RegisterUserDto, UserEntity> mapEntity;
 	@Autowired
-	Mapper<UserEntity, RegisteredUserDto> toDto;
+	Mapper<UserEntity, RegisteredUserDto> mapRegisteredUser;
+	@Autowired
+	Mapper<UserEntity, LoginResponseDto> mapLogin;
 
 	@Override
 	public RegisteredUserDto register(RegisterUserDto user) {
 		try {
-			var u = toEntity.map(user);
+			var u = mapEntity.map(user);
 			var p = encoder.encode(user.getPassword());
 			log.info("Password encrypted: {}", p);
 			u.setPassword(p);
 			if (user.getRoles() != null)
 				Stream.of(user.getRoles().split(",")).forEach(r -> u.getRoles().add(roles.findOneByName(r) //
 						.orElse(roles.save(RoleEntity.builder().withName(r).build()))));
-			return toDto.map(users.save(u));
+			return mapRegisteredUser.map(users.save(u));
 		} catch (Exception e) {
 			log.error(String.format("Exception saving user %s", user), e);
 			throw new PersistEntityException(user);
@@ -66,13 +69,13 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public Optional<RegisteredUserDto> login(String username, String password) {
+	public Optional<LoginResponseDto> login(String username, String password) {
 		try {
 			var a = auth.authenticate(new UsernamePasswordAuthenticationToken(username, password));
 			a.getAuthorities();
 			SecurityContextHolder.getContext().setAuthentication(a);
 
-			var dto = toDto.map(users.findOneByUsername(username).orElseThrow());
+			var dto = mapLogin.map(users.findOneByUsername(username).orElseThrow());
 			dto.setToken(jwt.generateToken(a));
 			return Optional.of(dto);
 		} catch (NoSuchElementException e) {
@@ -87,7 +90,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public Optional<RegisteredUserDto> get(long id) {
 		try {
-			return Optional.of(toDto.map(users.findById(id).orElseThrow()));
+			return Optional.of(mapRegisteredUser.map(users.findById(id).orElseThrow()));
 		} catch (Exception e) {
 			log.error(String.format("User not found for id %s", id), e);
 			return Optional.empty();
