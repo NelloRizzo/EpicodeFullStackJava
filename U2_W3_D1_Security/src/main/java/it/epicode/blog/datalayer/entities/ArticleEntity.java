@@ -23,6 +23,7 @@ public class ArticleEntity extends EntityBase {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "articles_seq")
 	@SequenceGenerator(name = "articles_seq", sequenceName = "articles_seq")
+	@EqualsAndHashCode.Include
 	private long id;
 	@Column(length = 80, nullable = false)
 	private String title;

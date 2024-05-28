@@ -23,6 +23,7 @@ public class CommentEntity extends EntityBase {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "comments_seq")
 	@SequenceGenerator(name = "comments_seq", sequenceName = "comments_seq")
+	@EqualsAndHashCode.Include
 	private long id;
 	@Column(length = 1024, nullable = false)
 	private String content;

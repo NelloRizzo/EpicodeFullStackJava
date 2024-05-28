@@ -6,6 +6,9 @@ import it.epicode.blog.businesslayer.services.dto.RegisterUserDto;
 import it.epicode.blog.businesslayer.services.dto.RegisteredUserDto;
 
 public interface UserService {
-	Optional<RegisteredUserDto> register(RegisterUserDto user);
+	RegisteredUserDto register(RegisterUserDto user);
+
 	Optional<RegisteredUserDto> login(String username, String password);
+
+	Optional<RegisteredUserDto> get(long id);
 }
