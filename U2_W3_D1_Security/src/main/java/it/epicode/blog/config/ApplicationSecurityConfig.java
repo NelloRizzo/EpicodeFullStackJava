@@ -45,13 +45,17 @@ public class ApplicationSecurityConfig {
 				.csrf(c -> c.disable())//
 				.authorizeHttpRequests(authorize -> //
 				authorize //
+							// abilita l'accesso anonimo all'api di login
 						.requestMatchers("/api/users/login").permitAll() //
-						.requestMatchers(HttpMethod.POST, "/api/users").permitAll() //
+						// solo per consentire la registrazione di un utente
+						.requestMatchers(HttpMethod.POST, "/api/users").permitAll()
+						// tutte le altre richieste sono accessibili ad utenti autenticati
 						.requestMatchers("/**").authenticated() //
 				) //
 				.httpBasic(Customizer.withDefaults()) //
-				.sessionManagement(sm -> //
-				sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))//
+				.sessionManagement( //
+						// gestione della sessione di tipo stateless
+						sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))//
 				.addFilterBefore(authenticationJwtToken(), UsernamePasswordAuthenticationFilter.class);
 
 		return http.build();

@@ -1,5 +1,9 @@
 package it.epicode.blog.presentationlayer.controllers.api.exceptions;
 
+/**
+ * Eccezione verificatasi in fase di validazione dei model in input ai controllers.
+ *
+ */
 public class ValidationException extends RuntimeException {
 	private static final long serialVersionUID = 1L;
 

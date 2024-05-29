@@ -5,6 +5,7 @@ import java.util.Date;
 
 import javax.crypto.SecretKey;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
@@ -12,11 +13,16 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import it.epicode.blog.businesslayer.services.security.SecurityUserDetails;
 
+/**
+ * Gestione delle funzionalità legate al token jwt.
+ */
 @Component
 public class JwtUtils { // centralizza la gestione del JWT
 
-	private String securityKey = "chiavesegreta123chiavesegreta123";
-	private long expirationMs = 864000000;
+	@Value("${jwt.key}")
+	private String securityKey; // = "chiavesegreta123chiavesegreta123";
+	@Value("${jwt.expirationMs}")
+	private long expirationMs; // = 864000000;
 
 	public String generateToken(Authentication auth) {
 		byte[] keyBytes = securityKey.getBytes();

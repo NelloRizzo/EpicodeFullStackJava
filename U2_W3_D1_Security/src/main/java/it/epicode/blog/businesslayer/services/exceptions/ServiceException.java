@@ -1,5 +1,9 @@
 package it.epicode.blog.businesslayer.services.exceptions;
 
+/**
+ * Eccezione nella gestione dei services.
+ *
+ */
 public class ServiceException extends RuntimeException {
 	private static final long serialVersionUID = 1L;
 

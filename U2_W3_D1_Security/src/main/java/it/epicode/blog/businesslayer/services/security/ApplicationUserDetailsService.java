@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import it.epicode.blog.datalayer.repositories.UsersRepository;
 
+// Servizio di recupero di un utente tramite le procedure di gestione utente di Spring Security
 @Service
 public class ApplicationUserDetailsService implements UserDetailsService {
 
