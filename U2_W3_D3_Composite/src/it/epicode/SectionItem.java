@@ -23,4 +23,9 @@ public class SectionItem extends BookItem {
 		content.forEach(c -> c.print(indent + 1));
 	}
 
+	@Override
+	protected int getPages() {
+		return content.stream().mapToInt(c -> c.getPages()).sum();
+	}
+
 }

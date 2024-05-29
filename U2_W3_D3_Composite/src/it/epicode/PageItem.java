@@ -14,4 +14,9 @@ public class PageItem extends BookItem{
 		System.out.println(content);
 	}
 
+	@Override
+	protected int getPages() {
+		return 1;
+	}
+
 }

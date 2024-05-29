@@ -15,6 +15,11 @@ public class Program {
 			System.out.format("%sImmagine: %s\n", "\t".repeat(indent), name);
 		}
 
+		@Override
+		protected int getPages() {
+			return 1;
+		}
+
 	}
 
 	/*

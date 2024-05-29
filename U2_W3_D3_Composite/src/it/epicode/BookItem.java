@@ -6,5 +6,6 @@ public abstract class BookItem {
 		print(0);
 	}
 
+	protected abstract int getPages();
 	protected abstract void print(int indent);
 }
