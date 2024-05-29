@@ -45,7 +45,7 @@ public class ApplicationSecurityConfig {
 				.csrf(c -> c.disable())//
 				.authorizeHttpRequests(authorize -> //
 				authorize //
-							// abilita l'accesso anonimo all'api di login
+						// abilita l'accesso anonimo all'api di login
 						.requestMatchers("/api/users/login").permitAll() //
 						// solo per consentire la registrazione di un utente
 						.requestMatchers(HttpMethod.POST, "/api/users").permitAll()
